@@ -11,14 +11,14 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-   public function register(Request $request)   
+   public function register(Request $request)
 {
     //validator
     $validator = Validator::make($request->all(),[
         'name'  => 'required',
         'email' => 'required|email',
         'password' => 'required',
-        'c_password' => 'required|same:paspword'
+        'c_password' => 'required|same:password',
     ]);
     if($validator->fails()){
         $response = [
@@ -31,7 +31,7 @@ class AuthController extends Controller
     $input['password']= bcrypt($input['password']);
     $user = User::create($input);
 
-    $success['token']= $user->createToken('MyApp')->plainTextTocken;
+    $success['token']= $user->createToken('MyApp')->plainTextToken;
     $success['name'] = $user->name;
 
     $response = [
@@ -44,15 +44,15 @@ class AuthController extends Controller
 
 public function login(Request $request){
     if(Auth::attempt(['email'=>$request->email,'password'=>$request->password])){
-    //   $user=Auth::user();
+    //    $user=Auth::user();
       $user = $request->user();
-      $success['token']= $user->createToken('MyApp')->plainTextTocken;
+      $success['token']= $user->createToken('MyApp')->plainTextToken;
       $success['name'] = $user->name;
-  
+
       $response = [
           'success' => true,
           'data'=>$success,
-          'message'=>"User register successfully"
+          'message'=>"User Login successfully"
       ];
      return  response()->json($response ,200);
 

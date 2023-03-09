@@ -1,21 +1,32 @@
 <script setup>
-import { reactive } from 'vue'
+    import axios from 'axios'
+    import {reactive,ref} from 'vue';
+    import {useRouter} from 'vue-router'
+    const router = useRouter()
 
 let form = reactive({
     email:'',
     password:'',
 })
+let error = ref('')
 
 const login = async () => {
     await axios.post('/api/login',form)
-    .then(Response=>{
-         console.log(Response)
+    .then(response =>{
+        if (response.data.success){
+           // console.log(response)
+             localStorage.setItem('token',response.data.data.token)
+             router.push('/admin/home')
+        }else {
+            error.value = response.data.message;
+        }
     })
 }
 </script>
 <template>
     <div class="login">
        <div class="formLogin">
+           <p class="danger-text" v-if="error">{{error}}</p>
         <form @submit.prevent="login" >
         <input type="email" placeholder="enter your email" v-model="form.email"/>
         <br>
@@ -81,5 +92,8 @@ input:focus{
     background: #43467f;
     color: #ffffff;
 }
+    .danger-text{
+        color: red;
+    }
 
 </style>
