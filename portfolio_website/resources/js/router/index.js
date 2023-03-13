@@ -1,6 +1,7 @@
 import { createRouter , createWebHistory} from "vue-router";
 //admin
 import homeAdminIndex from '../components/admin/home/index.vue' ;
+import aboutAdminIndex from '../components/admin/about/index.vue';
 // pages
 import homePageIndex from '../components/pages/home/index.vue';
 import login from '../components/auth/login.vue'
@@ -10,15 +11,7 @@ import notfound from '../components/notFound.vue';
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
-        //pages
-        {
-          path:'/',
-            name:'Home',
-          component: homePageIndex,
-            meta:{
-                requiresAuth:false
-            }
-      },
+     
       //admin
       {
           path:'/admin/home',
@@ -28,6 +21,15 @@ const router = createRouter({
               requiresAuth:true
           }
       },
+      //about
+      {
+        path:'/admin/about',
+        name:'adminAbout',
+        component:aboutAdminIndex,
+        meta:{
+          requiresAuth:true
+        }
+      },
       //login
       {
         path:'/login',
@@ -36,6 +38,15 @@ const router = createRouter({
           meta:{
               requiresAuth:false
           }
+      },
+         //pages
+         {
+          path:'/',
+            name:'Home',
+          component: homePageIndex,
+            meta:{
+                requiresAuth:false
+            }
       },
        //notFound
        {
