@@ -2,6 +2,7 @@ import { createRouter , createWebHistory} from "vue-router";
 //admin
 import homeAdminIndex from '../components/admin/home/index.vue' ;
 import aboutAdminIndex from '../components/admin/about/index.vue';
+import adminServiceIndex from '../components/admin/services/index.vue';
 // pages
 import homePageIndex from '../components/pages/home/index.vue';
 import login from '../components/auth/login.vue'
@@ -26,6 +27,15 @@ const router = createRouter({
         path:'/admin/about',
         name:'adminAbout',
         component:aboutAdminIndex,
+        meta:{
+          requiresAuth:true
+        }
+      },
+       //about
+       {
+        path:'/admin/services',
+        name:'adminService',
+        component:adminServiceIndex,
         meta:{
           requiresAuth:true
         }

@@ -35,8 +35,8 @@ class AboutController extends Controller
 
         if($about->cv != $request->cv){
             $strpos = strpos($request->cv,';');
-            $sub= substr($request->cv,0,$strpos);
-            $ex= explode('/',$sub)[1];
+            $sub = substr($request->cv,0,$strpos);
+            $ex = explode('/',$sub)[1];
             $namecv = time().".".$ex;
             $img = image::make($request->cv)->resize(100,500);
             $upload_path = public_path()."/img/upload/";

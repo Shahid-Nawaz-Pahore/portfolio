@@ -28,7 +28,7 @@ const getPhoto = ()=>{
         if(form.value.photo.indexOf('base64') != -1){
             photo = form.value.photo
         }else{
-            photo = '/img/upload/'+form.value.photo
+            photo = '/img/upload/' + form.value.photo
         }
     }
     return photo
@@ -37,7 +37,7 @@ const changePhoto = (e) => {
     let file = e.target.files[0];
     let reader = new FileReader();
     let limit = 1024*1024*2
-    if (file['size']>limit){
+    if (file['size'] > limit){
         swal({
             icon:'error',
             tittle:'Oooops',
@@ -47,7 +47,7 @@ const changePhoto = (e) => {
     }
     reader.onloadend = (file) => {
         form.value.photo = reader.result
-    }
+    } 
     reader.readAsDataURL(file)
 }
 
@@ -71,7 +71,7 @@ const uploadCv = (e) =>{
 }
 const updateabout = async() => {
     await axios.post(  `/api/update_about/${form.value.id}`,form.value)
-    .then(response=>{
+    .then(response =>{
         toast.fire({
             icon:"success",
             tittle:"Updated successfully",
